@@ -10,10 +10,6 @@ import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-/**
- * Handles persistent saving of ESP settings.
- * The file is written to .minecraft/config/mobesp.json
- */
 public class MobEspConfig {
 
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
@@ -21,7 +17,6 @@ public class MobEspConfig {
             .getConfigDir()
             .resolve("mobesp.json");
 
-    // Saved data
     public String mobId = "minecraft:cow";
     public boolean enabled = false;
 
