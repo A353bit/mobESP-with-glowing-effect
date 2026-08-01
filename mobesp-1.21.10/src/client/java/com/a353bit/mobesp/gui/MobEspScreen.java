@@ -13,18 +13,12 @@ import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
 
-/**
- * Menu: text field for the mob ID, on/off toggle, and a button
- * to rebind the open key directly from here
- * (same logic as vanilla Controls menu: click, then press the key).
- */
 public class MobEspScreen extends Screen {
 
     private TextFieldWidget mobIdField;
     private ButtonWidget rebindButton;
     private final MobEspConfig config = MobEspConfig.get();
 
-    // true while waiting for the user to press a new key
     private boolean listeningForKey = false;
 
     public MobEspScreen() {
@@ -47,7 +41,6 @@ public class MobEspScreen extends Screen {
         this.addDrawableChild(this.mobIdField);
         this.setInitialFocus(this.mobIdField);
 
-        // On/off toggle
         this.addDrawableChild(
                 CyclingButtonWidget.onOffBuilder(config.enabled)
                         .build(centerX - 100, startY + 30, 200, 20,
@@ -55,13 +48,11 @@ public class MobEspScreen extends Screen {
                                 (button, value) -> config.enabled = value)
         );
 
-        // Button to rebind the menu open key
         this.rebindButton = ButtonWidget.builder(currentKeyText(), button -> startListening())
                 .dimensions(centerX - 100, startY + 60, 200, 20)
                 .build();
         this.addDrawableChild(this.rebindButton);
 
-        // "Done" button
         this.addDrawableChild(
                 ButtonWidget.builder(Text.translatable("mobesp.screen.done"), button -> this.close())
                         .dimensions(centerX - 100, startY + 90, 200, 20)
@@ -86,7 +77,6 @@ public class MobEspScreen extends Screen {
     public boolean keyPressed(KeyInput input) {
         if (this.listeningForKey) {
             if (input.key() == GLFW.GLFW_KEY_ESCAPE) {
-                // Cancel without changing anything
                 this.listeningForKey = false;
                 this.rebindButton.setMessage(currentKeyText());
                 return true;
@@ -95,14 +85,12 @@ public class MobEspScreen extends Screen {
             KeyBinding key = MobEspClient.getOpenMenuKey();
             key.setBoundKey(InputUtil.Type.KEYSYM.createFromCode(input.key()));
             KeyBinding.updateKeysByCode();
-            // Save immediately to options.txt, like the vanilla Controls menu does
             MinecraftClient.getInstance().options.write();
 
             this.listeningForKey = false;
             this.rebindButton.setMessage(currentKeyText());
             return true;
         }
-        // If we're not listening, let the text field/other widgets handle the key
         return super.keyPressed(input);
     }
 
