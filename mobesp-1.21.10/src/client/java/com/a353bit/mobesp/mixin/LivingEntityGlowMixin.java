@@ -9,12 +9,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-/**
- * Forces isGlowing() to return true for the chosen mob type when the ESP
- * toggle is on. Minecraft's own glow rendering (same system used by the
- * Glowing status effect and Spectator mode) already draws entity outlines
- * through blocks, so no custom rendering pipeline is needed.
- */
 @Mixin(LivingEntity.class)
 public class LivingEntityGlowMixin {
 
@@ -27,7 +21,7 @@ public class LivingEntityGlowMixin {
 
         Identifier targetId = Identifier.tryParse(config.mobId);
         if (targetId == null) {
-            return; // malformed ID typed by the user, don't crash
+            return;
         }
 
         LivingEntity self = (LivingEntity) (Object) this;
