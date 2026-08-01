@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.a353bit.mobesp.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "LivingEntityGlowMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

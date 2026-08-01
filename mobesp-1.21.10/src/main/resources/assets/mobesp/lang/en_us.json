@@ -1,0 +1,10 @@
+{
+  "key.mobesp.open_menu": "Open Mob ESP Menu",
+  "key.category.mobesp": "Mob ESP",
+  "mobesp.screen.title": "Mob ESP Settings",
+  "mobesp.screen.mob_id": "Mob ID (e.g. minecraft:cow)",
+  "mobesp.screen.enabled": "ESP Enabled",
+  "mobesp.screen.done": "Done",
+  "mobesp.screen.rebind": "Open key: %s",
+  "mobesp.screen.press_a_key": "> Press a key <"
+}
