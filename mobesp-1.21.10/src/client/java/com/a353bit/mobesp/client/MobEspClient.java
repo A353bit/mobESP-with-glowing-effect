@@ -15,8 +15,6 @@ public class MobEspClient implements ClientModInitializer {
     private static final KeyBinding.Category CATEGORY =
             KeyBinding.Category.create(Identifier.of("mobesp", "mobesp"));
 
-    // Tasto G di default, modificabile da Options -> Controls -> Mob ESP
-    // oppure direttamente dal menu della mod (vedi MobEspScreen)
     private static KeyBinding openMenuKey;
 
     public static KeyBinding getOpenMenuKey() {
@@ -32,7 +30,6 @@ public class MobEspClient implements ClientModInitializer {
                 CATEGORY
         ));
 
-        // Ogni tick controlla se il tasto è stato premuto
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (openMenuKey.wasPressed()) {
                 if (client.currentScreen == null) {
